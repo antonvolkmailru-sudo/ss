@@ -4,11 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GIT - enkel guide</title>
+
   <style>
     :root { --main:#0f766e; --text:#18302e; --accent:#f59e0b; --light:#eef8f6; --dark:#0c2724; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; font-family:Arial, sans-serif; color:var(--text); background:#fbfdfd; line-height:1.6; }
+
+    /*
+      MAKKER-TILBAKEMELDING:
+      Jeg liker fargene fordi de passer godt til temaet Git.
+      Siden ser rolig og moderne ut.
+    */
+
     header { background:var(--dark); color:white; padding:72px 20px 48px; }
     .wrap { width:min(1000px, calc(100% - 36px)); margin:auto; }
     .tag { display:inline-block; color:#1f2937; background:var(--accent); padding:5px 11px; border-radius:999px; font-weight:bold; font-size:.86rem; }
@@ -16,17 +24,37 @@
     h2 { color:var(--main); font-size:1.8rem; margin:0 0 12px; }
     h3 { margin:0 0 6px; color:var(--dark); }
     .lead { max-width:670px; color:#d8f3ed; font-size:1.15rem; }
+
+    /*
+      MAKKER-TILBAKEMELDING:
+      Navigasjonen er enkel og fungerer bra.
+      Det er lett å finne fram til de ulike delene.
+    */
+
     nav { padding:16px 0; background:white; border-bottom:1px solid #dbe8e5; position:sticky; top:0; z-index:3; }
     nav a { color:var(--main); text-decoration:none; font-weight:bold; margin-right:15px; white-space:nowrap; font-size:.9rem; }
     main { padding:48px 0; }
     section { margin:0 0 50px; scroll-margin-top:70px; }
     .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+
+    /*
+      MAKKER-TILBAKEMELDING:
+      Kortene gjør teksten mye lettere å lese.
+      Det ser ryddig ut og passer godt til siden.
+    */
+
     .card { background:white; border:1px solid #dceae7; padding:22px; border-radius:14px; box-shadow:0 8px 24px rgba(15,118,110,.06); }
     .notice { border-left:5px solid var(--accent); background:#fff8e8; padding:15px 18px; border-radius:0 10px 10px 0; }
     code { font-family:Consolas, monospace; background:#e8f2f0; padding:2px 5px; border-radius:4px; color:#075e54; }
     .command { background:var(--dark); color:#e5f7f3; padding:16px; border-radius:10px; margin:10px 0; overflow:auto; }
-    .command code { color:#fff; background:none; padding:0; }
     .command strong { color:#fbbf24; }
+
+    /*
+      MAKKER-TILBAKEMELDING:
+      Jeg liker illustrasjonene.
+      De gjør Git lettere å forstå for nybegynnere.
+    */
+
     .visual { background:var(--light); border:1px solid #c8e4dd; border-radius:16px; padding:24px; margin-top:22px; }
     .flow { display:flex; align-items:center; justify-content:space-between; gap:8px; text-align:center; }
     .node { flex:1; background:white; padding:17px 10px; border-radius:10px; border:2px solid var(--main); font-weight:bold; }
@@ -37,15 +65,47 @@
     .side { background:#252526; padding:16px; font-size:.85rem; }
     .side b { color:#fff; } .file { color:#9cdcfe; margin:8px 0 0 9px; }
     .editor { padding:25px; font-family:Consolas, monospace; font-size:.9rem; } .green { color:#b5cea8; } .blue { color:#569cd6; } .comment { color:#6a9955; }
+
+    /*
+      MAKKER-TILBAKEMELDING:
+      Kommandoene er enkle og gode for nybegynnere.
+      Jeg synes det er lett å forstå hva hver kommando gjør.
+    */
+
     .palette { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
     .swatch { min-height:120px; border-radius:12px; padding:14px; display:flex; align-items:end; font-weight:bold; }
     .wireframe { display:grid; grid-template-columns:1fr 2fr; gap:8px; background:#fff; padding:12px; border:2px solid #334155; }
     .wf-head,.wf-foot { grid-column:1/-1; border:2px solid #334155; padding:10px; text-align:center; } .wf-side,.wf-main { border:2px solid #334155; padding:22px 10px; text-align:center; } .wf-main { min-height:130px; }
+
+    /*
+      MAKKER-TILBAKEMELDING:
+      Et forbedringsforslag er å vise Git-kommandoene som en
+      vanlig arbeidsflyt: status → add → commit → push.
+    */
+
     footer { background:var(--dark); color:#d8f3ed; padding:26px 0; }
-    @media(max-width:650px) { .grid { grid-template-columns:1fr; } .flow { flex-direction:column; } .arrow { transform:rotate(90deg); } .vscode-body { grid-template-columns:110px 1fr; } .palette { grid-template-columns:1fr; } }
+
+    /*
+      MAKKER-TILBAKEMELDING:
+      Responsivt design er bra.
+      På mobil kunne navigasjonen vært litt mer oversiktlig.
+      
+      NY VERSJON:
+      Navigasjonslenkene kan legges på flere linjer på små skjermer.
+    */
+
+    @media(max-width:650px) {
+      .grid { grid-template-columns:1fr; }
+      .flow { flex-direction:column; }
+      .arrow { transform:rotate(90deg); }
+      .vscode-body { grid-template-columns:110px 1fr; }
+      .palette { grid-template-columns:1fr; }
+    }
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="wrap">
       <span class="tag">ENKEL GIT-GUIDE</span>
@@ -53,12 +113,21 @@
       <p class="lead">Git hjelper deg å lagre versjoner av arbeidet ditt, samarbeide med andre og få kontroll på endringer i kode.</p>
     </div>
   </header>
+
   <nav><div class="wrap"><a href="#git">Git</a><a href="#commands">Kommandoer</a><a href="#vscode">VS Code</a><a href="#markdown">Markdown</a><a href="#dokumentasjon">Dokumentasjon</a></div></nav>
+
   <main class="wrap">
     <section id="git">
       <h2>Hva er Git?</h2>
       <p>Git er et versjonskontrollsystem. Det betyr at Git lagrer historikken til filene dine. Du kan se hva som er endret, gå tilbake til en tidligere versjon og samarbeide uten at hverandre sine filer blir ødelagt.</p>
       <div class="notice"><b>Tenk på Git som lagringspunkter i et spill:</b> Et <code>commit</code> er et lagringspunkt du kan gå tilbake til.</div>
+
+      <!--
+        MAKKER-TILBAKEMELDING:
+        Denne delen forklarer Git på en enkel måte.
+        Sammenligningen med et spill gjør det lettere å forstå.
+      -->
+
       <div class="visual">
         <h3>Illustrasjon 1: Slik flytter en endring seg</h3>
         <div class="flow"><div class="node">Filer på PC-en</div><div class="arrow">→</div><div class="node">Git<br><small>commit</small></div><div class="arrow">→</div><div class="node">GitHub<br><small>push</small></div></div>
@@ -95,23 +164,60 @@
     <section id="vscode">
       <h2>Bruk av Git i VS Code</h2>
       <p>Åpne prosjektmappen i VS Code. Klikk på <b>Source Control</b>-ikonet i menyen til venstre. Der ser du endrede filer, kan skrive en commit-melding, trykke <b>Commit</b> og deretter <b>Sync Changes</b> eller <b>Push</b>.</p>
+
+      <!--
+        MAKKER-TILBAKEMELDING:
+        VS Code-eksempelet er bra fordi det viser hvordan Git
+        ser ut i praksis, ikke bare gjennom tekst.
+      -->
+
       <div class="visual"><h3>Illustrasjon 2: Git i VS Code</h3><div class="vscode"><div class="vscode-top">● ● ● &nbsp; index.html - Visual Studio Code</div><div class="vscode-body"><div class="side"><b>SOURCE CONTROL</b><div class="file">M index.html</div><div class="file">+ style.css</div><br><b>Message</b><br><br>✓ Commit<br>↻ Sync Changes</div><div class="editor"><span class="comment">&lt;!-- Endring klar til commit --&gt;</span><br><span class="blue">&lt;h1&gt;</span>Min Git-side<span class="blue">&lt;/h1&gt;</span><br><br><span class="green">1 fil endret</span></div></div></div></div>
     </section>
 
     <section id="markdown">
       <h2>Hva er en .md-fil?</h2>
       <p>En <code>.md</code>-fil er en Markdown-fil. Markdown er enkel tekst med tegn som lager overskrifter, lister og lenker. På GitHub brukes ofte <code>README.md</code> for å forklare et prosjekt.</p>
-      <div class="card"><h3>Eksempel på README.md</h3><div class="command"><code># Mitt prosjekt<br><br>Dette er en kort beskrivelse.<br><br>## Funksjoner<br>- Viser informasjon<br>- Lagrer data<br><br>[Åpne GitHub](https://github.com)</code></div></div>
+
+      <div class="card">
+        <h3>Eksempel på README.md</h3>
+        <div class="command"><code># Mitt prosjekt<br><br>Dette er en kort beskrivelse.<br><br>## Funksjoner<br>- Viser informasjon<br>- Lagrer data<br><br>[Åpne GitHub](https://github.com)</code></div>
+      </div>
     </section>
 
     <section id="dokumentasjon">
       <h2>Dokumentasjon</h2>
+
       <div class="grid">
-        <div class="card"><h3>Wireframe</h3><p>Dette er en enkel plan for plasseringen av innholdet på nettsiden.</p><div class="wireframe"><div class="wf-head">Tittel + intro</div><div class="wf-side">Meny</div><div class="wf-main">Git / GitHub / Kommandoer<br><br>Illustrasjoner og eksempler</div><div class="wf-foot">Wireframe + fargepalett</div></div></div>
-        <div class="card"><h3>Fargepalett</h3><p>Fargene er valgt for et rolig, teknologisk uttrykk med god lesbarhet.</p><div class="palette"><div class="swatch" style="background:#0f766e;color:#fff">Hovedfarge<br>#0F766E</div><div class="swatch" style="background:#18302e;color:#fff">Tekstfarge<br>#18302E</div><div class="swatch" style="background:#f59e0b;color:#1f2937">Aksentfarge<br>#F59E0B</div></div></div>
+        <div class="card">
+          <h3>Wireframe</h3>
+          <p>Dette er en enkel plan for plasseringen av innholdet på nettsiden.</p>
+
+          <div class="wireframe">
+            <div class="wf-head">Tittel + intro</div>
+            <div class="wf-side">Meny</div>
+            <div class="wf-main">Git / GitHub / Kommandoer<br><br>Illustrasjoner og eksempler</div>
+            <div class="wf-foot">Wireframe + fargepalett</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Fargepalett</h3>
+          <p>Fargene er valgt for et rolig, teknologisk uttrykk med god lesbarhet.</p>
+
+          <div class="palette">
+            <div class="swatch" style="background:#0f766e;color:#fff">Hovedfarge<br>#0F766E</div>
+            <div class="swatch" style="background:#18302e;color:#fff">Tekstfarge<br>#18302E</div>
+            <div class="swatch" style="background:#f59e0b;color:#1f2937">Aksentfarge<br>#F59E0B</div>
+          </div>
+        </div>
       </div>
     </section>
+
   </main>
-  <footer><div class="wrap">Laget av Anton og Yaroslav | 2ITA</div></footer>
+
+  <footer>
+    <div class="wrap">Laget av Anton og Yaroslav | 2ITA</div>
+  </footer>
+
 </body>
 </html>
